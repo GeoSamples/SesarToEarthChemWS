@@ -55,7 +55,7 @@ accept-language text/html
 </sam2:sample>
 </samples>
 */
-
+//bc-11:45am 7/25
 @Path("/ssec")
 public class SesarEcService {
 
