@@ -131,10 +131,14 @@ public class ActionDao {
 	}
 	
 	private void saveActionBy(Integer affiliationNum) {
-		
 		String descr = sample.getCollectorDetail();
-		String q = "INSERT INTO action_by values ("+(++maxActionByBridgeNum)+","+actionNum+","+affiliationNum+",1,'"+descr+"')";
-		queries.add(q);
+		String q = "select bridge_num from action_by where action_num ="+actionNum+" and affiliation_num =" +affiliationNum;
+		if(!"".equals(descr)) q += " and role_description ='"+descr+"'";		
+	    Object obj = DatabaseUtil.getUniqueResult(q);
+	    if(obj == null) {
+	    	q = "INSERT INTO action_by values ("+(++maxActionByBridgeNum)+","+actionNum+","+affiliationNum+",1,'"+descr+"')";
+	    	queries.add(q);
+	    }
 	}
 
 	
@@ -168,7 +172,6 @@ public class ActionDao {
 			q +=" and upper(first_name)=upper("+first+") and upper(middle_name)=upper("+middle+")";
 		} 
 		Integer personNum = null;
-		//Object obj = DatabaseUtil.getUniqueResult("select person_num from person where last_name="+last);
 		Object obj = DatabaseUtil.getUniqueResult(q);
 		if(obj !=null) {
 			personNum = (Integer)obj;
