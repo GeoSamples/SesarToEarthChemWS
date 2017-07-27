@@ -98,12 +98,18 @@ public class SamplingFeatureDao {
 		extensionProperty = sample.getAgeMax();
 		if(extensionProperty != null) saveSamplingFeatureExtensionProperty(extensionProperty,"maximum numeric age");
 		extensionProperty = sample.getSize();
-		if(extensionProperty != null) saveSamplingFeatureExtensionProperty(extensionProperty,"size_unit");
+		if(extensionProperty != null) {
+			String sizeUnit = sample.getSizeUnit();
+			if(!"".equals(sizeUnit))
+			saveSamplingFeatureExtensionProperty(extensionProperty,"sample_size_"+sizeUnit);
+		}
 		extensionProperty = sample.getDepthMin();
 		if(extensionProperty != null) saveSamplingFeatureExtensionProperty(extensionProperty,"depth, minimum");
 		extensionProperty = sample.getDepthMax();
 		if(extensionProperty != null) saveSamplingFeatureExtensionProperty(extensionProperty,"depth, maximum");
-
+		extensionProperty = sample.getPurpose();
+		if(extensionProperty != null) saveSamplingFeatureExtensionProperty(extensionProperty,"sample purpose");
+		
 		//FeatureOfInterest
 		foiNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(feature_of_interest_num) FROM feature_of_interest");	
 		foiCvNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(feature_of_interest_cv_num) FROM feature_of_interest_cv");		

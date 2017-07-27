@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
-* Java bean used in Jersey
+* Java bean used in Jersey for sample element
 *
 * @author  Bai
 * @version 1.0
@@ -70,11 +70,7 @@ public class Sample implements Serializable {
 	private String launchTypeName;//
 	private String collector;//collector
 	private String collectorDetail;//collector_detail
-/*	
-	
-	private Float purpose;//What is the extension_property.property_data_unit_num for "purpose"?
-	
-*/	
+	private Float purpose;
 	private SampleOtherNames sampleOtherNames;
 	private ExternalUrls externalUrls;
 	private Classification classification;
@@ -474,6 +470,13 @@ public class Sample implements Serializable {
 	@XmlElement (name = "collector_detail")
 	public void setCollectorDetail(String collectorDetail) {
 		this.collectorDetail = collectorDetail;
+	}	
+	public Float getPurpose() {
+		return purpose;
+	}
+	@XmlElement
+	public void setPurpose(Float purpose) {
+		this.purpose = purpose;
 	}
 	/////////////
 	public String getStartPoint() {

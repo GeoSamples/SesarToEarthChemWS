@@ -2,11 +2,13 @@
  * 
  */
 /**
+ * This class is used for prefix namespace in package level.
+ * 
 * @author  Bai
 * @version 1.0
 * @since   2017-07-26
  *
- * this class is used for prefix namespace in package level.
+ * 
  */
 
 

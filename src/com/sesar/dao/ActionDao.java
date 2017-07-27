@@ -6,7 +6,7 @@ import java.util.List;
 import com.sesar.model.*;
 import com.sesar.util.DatabaseUtil;
 /**
-* Retrieve data from XML and create updating queries for saving to action, equipment, equipment_action and action_by
+* Retrieve data from XML and create updating queries for saving to person, affiliation, action, equipment, equipment_action and action_by
 * 
 * @author  Bai
 * @version 1.0
@@ -18,7 +18,6 @@ public class ActionDao {
 	private Sample sample;
 	private int sfNum; //sampling_feature_num
 	private List<String> queries;
-//	private String error;
 	private Integer methodNum;
 	private Integer actionNum;
 	private Integer maxActionNum;
@@ -59,7 +58,6 @@ public class ActionDao {
 		//action and equipment_action
 		String name = sample.getCruiseFieldPrgrm();
 		saveAction(name,"Cruise");
-		//save action_by ?
 		String ename = sample.getPlatformName();
 		String etype = sample.getPlatformType();
 		String edescr = sample.getPlatformDescr();

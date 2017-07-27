@@ -6,7 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
-* Java bean used in Jersey
+* Java bean used in Jersey for external_urls element
 *
 * @author  Bai
 * @version 1.0

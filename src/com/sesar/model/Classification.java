@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
-* Java bean used in Jersey
+* Java bean used in Jersey for classification element
 *
 * @author  Bai
 * @version 1.0
