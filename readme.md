@@ -36,6 +36,22 @@ This contains code files to receive data from xml and to access data from databa
 ## SesarToEarthChemWS/src/com/sesar/dao/ActionDao.java
 Retrieve data from XML and create updating queries for saving to person, affiliation, action, method, feature_action, equipment, equipment_type, equipment_action and action_by of database.
 
+## SesarToEarthChemWS/src/com/sesar/util/
+This contains programing utility files.
+
+## SesarToEarthChemWS/src/com/sesar/util/DatabaseUtil.java
+This file is used for making database connection, for retrieving data from database, and for saving data to database by JDBC. 
+
+## SesarToEarthChemWS/src/com/sesar/ws/
+This contains web service file.
+
+## SesarToEarthChemWS/src/com/sesar/ws/SesarEcService.java
+
+
+
+
+
+
 ## SesarToEarthChemWS/src/com/sesar/dao/SamplingFeatureDao.java
 Retrieve data from XML and create updating queries for saving to sampling_feature, specimen, sampling_feature_external_identifier, related_feature, taxonomic_classifier, sampling_feature_taxonomic_classifier, annotation and sampling_feature_annotation of database.
 
