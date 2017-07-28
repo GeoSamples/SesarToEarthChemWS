@@ -28,7 +28,7 @@ The classpath files contains src and target entries that correspond with folders
 This is the Eclipse project description file.
 
 ## sesar_to_ec_test.xml
-This is xml file using for test.
+This is xml file used for test.
 
 ## src/com/sesar
 This contains all source code files.
