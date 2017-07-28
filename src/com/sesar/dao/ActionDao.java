@@ -6,7 +6,7 @@ import java.util.List;
 import com.sesar.model.*;
 import com.sesar.util.DatabaseUtil;
 /**
-* Retrieve data from XML and create updating queries for saving to person, affiliation, action, equipment, equipment_action and action_by
+* Retrieve data from XML and create updating queries for saving to person, affiliation, action, method, feature_action, equipment, equipment_type, equipment_action and action_by
 * 
 * @author  Bai
 * @version 1.0
