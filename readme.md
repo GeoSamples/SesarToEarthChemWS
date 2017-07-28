@@ -26,3 +26,13 @@ The classpath files contains src and target entries that correspond with folders
 
 ## .project
 This is the Eclipse project description file.
+
+##  src/com/sesar
+This contains all source code files.
+
+## SesarToEarthChemWS/src/com/sesar/dao/
+This contains code files to access data from database;
+
+## SesarToEarthChemWS/src/com/sesar/dao/ActionDao.java
+Retrieve data from XML and create updating queries for saving to person, affiliation, action, method, feature_action, equipment, equipment_type, equipment_action and action_by
+
