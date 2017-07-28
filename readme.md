@@ -27,6 +27,9 @@ The classpath files contains src and target entries that correspond with folders
 ## .project
 This is the Eclipse project description file.
 
+## sesar_to_ec_test.xml
+This is xml file using for test.
+
 ## src/com/sesar
 This contains all source code files.
 
@@ -41,16 +44,6 @@ This contains programing utility files.
 
 ## SesarToEarthChemWS/src/com/sesar/util/DatabaseUtil.java
 This file is used for making database connection, for retrieving data from database, and for saving data to database by JDBC. 
-
-## SesarToEarthChemWS/src/com/sesar/ws/
-This contains web service file.
-
-## SesarToEarthChemWS/src/com/sesar/ws/SesarEcService.java
-
-
-
-
-
 
 ## SesarToEarthChemWS/src/com/sesar/dao/SamplingFeatureDao.java
 Retrieve data from XML and create updating queries for saving to sampling_feature, specimen, sampling_feature_external_identifier, related_feature, taxonomic_classifier, sampling_feature_taxonomic_classifier, annotation and sampling_feature_annotation of database.
@@ -85,6 +78,8 @@ Java bean used in xml Jersey for samples element.
 ## SesarToEarthChemWS/src/com/sesar/model/package-info.java
 This class is used for prefix namespace in the package level.
 
+## SesarToEarthChemWS/src/com/sesar/ws/
+This contains web service file.
 
-
-
+## SesarToEarthChemWS/src/com/sesar/ws/SesarEcService.java
+This is Restful web service file.
