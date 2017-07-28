@@ -6,7 +6,7 @@ import java.util.List;
 import com.sesar.model.*;
 import com.sesar.util.DatabaseUtil;
 /**
-* Retrieve data from XML and create updating queries for saving to database.
+* Retrieve data from XML and create updating queries for saving to sampling_feature, specimen, sampling_feature_external_identifier, related_feature, taxonomic_classifier, sampling_feature_taxonomic_classifier, annotation and sampling_feature_annotation of database.
 *
 * @author  Bai
 * @version 1.0

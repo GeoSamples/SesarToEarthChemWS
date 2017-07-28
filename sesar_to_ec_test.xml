@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sam2:samples xmlns:sam2="http://app.geosamples.org">
+    <sam2:sample>
+        <sam2:sample_type>Slab</sam2:sample_type> 
+        <sam2:name>sesar_s30</sam2:name>      
+        <sam2:material>Mineral</sam2:material>
+        <sam2:igsn>sesar_igsn30</sam2:igsn>
+        <sam2:parent_igsn></sam2:parent_igsn>
+        <sam2:is_private>N/A</sam2:is_private>
+        <sam2:publish_date>N/A</sam2:publish_date>
+        <sam2:classification>
+            <sam2:Rock>  
+                <sam2:Metamorphic>
+                    <sam2:MetamorphicType>sesar_MetamorphicType</sam2:MetamorphicType>
+                </sam2:Metamorphic>
+            </sam2:Rock>
+        </sam2:classification>
+        <sam2:classification_comment>sesar_classification_comment</sam2:classification_comment>
+        <sam2:field_name>sesar_field_name</sam2:field_name>
+        <sam2:description>sesar_description</sam2:description>
+        <sam2:age_min>5</sam2:age_min>
+        <sam2:age_max>8</sam2:age_max>
+        <sam2:age_unit>sampling_feature-->sampling_feature_extension_property-->extension_property.extension_property_data_unit_num=5</sam2:age_unit>
+        <sam2:geological_age>sesar_geologicAge</sam2:geological_age>
+        <sam2:geological_unit>sesar_geologic unit</sam2:geological_unit>
+        <sam2:collection_method>sesar_collection_method</sam2:collection_method>
+        <sam2:collection_method_descr>sesar action_description</sam2:collection_method_descr>
+        <sam2:size>99.9</sam2:size>
+        <sam2:size_unit>cm</sam2:size_unit>
+        <sam2:sample_comment>sesar sample comment</sam2:sample_comment>
+        <sam2:purpose>111</sam2:purpose>
+        <sam2:latitude>13.513</sam2:latitude>
+        <sam2:longitude>156.1723</sam2:longitude>
+        <sam2:latitude_end>12.513</sam2:latitude_end>
+        <sam2:longitude_end>155.1723</sam2:longitude_end>
+        <sam2:elevation>1000</sam2:elevation>
+        <sam2:elevation_end>2000</sam2:elevation_end>
+        <sam2:elevation_unit>Meter</sam2:elevation_unit>
+        <sam2:vertical_datum>sesar_elevation_datum</sam2:vertical_datum>
+        <sam2:northing>5000000</sam2:northing>
+        <sam2:easting>417000</sam2:easting>
+        <sam2:zone>0A</sam2:zone>
+        <sam2:navigation_type>sesar location navigation type</sam2:navigation_type>
+        <sam2:primary_location_type>sesar primary_location_type</sam2:primary_location_type>
+        <sam2:primary_location_name>sesar primary_location_name</sam2:primary_location_name>
+        <sam2:location_description>ssesar location description</sam2:location_description>
+        <sam2:locality>sesar locality</sam2:locality>
+        <sam2:locality_description>sesar locality description</sam2:locality_description>
+        <sam2:country>sesar country</sam2:country>
+        <sam2:province>sesar fujian</sam2:province>
+        <sam2:county>sesar minnan </sam2:county>
+        <sam2:city>sesar xiamen</sam2:city>
+        <sam2:cruise_field_prgrm>sesar action_name </sam2:cruise_field_prgrm>
+        <sam2:platform_type>Ship</sam2:platform_type>
+        <sam2:platform_name>sesar cruise equipment_name</sam2:platform_name>
+        <sam2:platform_descr>sesar equipment_description</sam2:platform_descr>
+        <sam2:launch_platform_name>sesar equipment name with action_type launch from ship</sam2:launch_platform_name>
+        <sam2:launch_id>sesar action name for action_type launch from ship</sam2:launch_id>
+        <sam2:launch_type_name>launch_type_name</sam2:launch_type_name>
+        <sam2:collector>A Lin</sam2:collector>
+        <sam2:collector_detail>sesar role_description</sam2:collector_detail>
+        <sam2:collection_start_date>2017-07-01</sam2:collection_start_date>
+        <sam2:collection_end_date>2017-07-21</sam2:collection_end_date>
+        <sam2:collection_date_precision>year</sam2:collection_date_precision>
+        <sam2:current_archive>sesar current_archive</sam2:current_archive>
+        <sam2:current_archive_contact></sam2:current_archive_contact>
+        <sam2:original_archive></sam2:original_archive>
+        <sam2:original_archive_contact>sesar original_archive_contact</sam2:original_archive_contact>
+        <sam2:depth_min></sam2:depth_min>
+        <sam2:depth_max>88.8</sam2:depth_max>
+        <sam2:depth_scale>sesar depth spatial reference system</sam2:depth_scale>
+        <sam2:sample_other_names>
+            <sam2:sample_other_name>sesar Other name1</sam2:sample_other_name>
+			<sam2:sample_other_name>sesar Other name2</sam2:sample_other_name>
+        </sam2:sample_other_names>
+        <sam2:external_urls>
+            <sam2:external_url>
+                <sam2:url>www.abc.com</sam2:url>
+                <sam2:description>sesar external_url code</sam2:description>
+                <sam2:url_type>sesar external_url type</sam2:url_type>
+            </sam2:external_url>
+        </sam2:external_urls>
+    </sam2:sample>
+</sam2:samples>
