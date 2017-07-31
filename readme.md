@@ -30,7 +30,7 @@ This folder is not been used.
 ## WebContent/WEB-INF/
 This contains lib folder and web.xml.
 
-## ## WebContent/WEB-INF/lib
+## WebContent/WEB-INF/lib
 This contains jar files, which contain libraries required for this project.
 
 ## WebContent/WEB-INF/web.xml
