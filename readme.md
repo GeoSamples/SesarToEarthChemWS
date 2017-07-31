@@ -28,7 +28,7 @@ This folder is the mandatory location of all Web resources.
 This folder is not been used.
 
 ## WebContent/WEB-INF/
-This contain lib folder and web.xml.
+This contains lib folder and web.xml.
 
 ## ## WebContent/WEB-INF/lib
 This contains jar files, which contain libraries required for this project.
