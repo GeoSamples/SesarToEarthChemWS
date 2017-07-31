@@ -6,7 +6,7 @@ The SESAR XML v2 schema is used, and data are loaded into the 2016 version of Ea
 # Requirements
 * Java SE 7, language, http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html 
 * Jersey 2.25, libraries for web services, https://jersey.java.net
-* PostgreSQL, database with ODM2 schema, https://www.postgresql.org/ 
+* PostgreSQL including postgresql-9.2-1004.jdbc4.jar, database with ODM2 schema, https://www.postgresql.org/ 
 * Eclipse 4.5.0, an integrated development environment (IDE), https://eclipse.org/ide/
 * Apache Tomcat v8.0, server for web services, http://tomcat.apache.org/
 
