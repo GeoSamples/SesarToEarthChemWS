@@ -10,6 +10,12 @@ The SESAR XML v2 schema is used, and data are loaded into the 2016 version of Ea
 * Eclipse 4.5.0, an integrated development environment (IDE), https://eclipse.org/ide/
 * Apache Tomcat v8.0, server for web services, http://tomcat.apache.org/
 
+# Deployment
+* Right click project name, "SesarToEarthChemWS", at Eclipse and select "Export";
+* Click "Web" folder, select "WAR file" and then click "Next >";
+* Click "Browse..." to find location of "\apache-tomcat-8.0.39\webapps" and enter file "searec" for war file and click "Save";
+* Finally, click "Finish" at "Export" page to finish deployment.
+
 # What's here:
 
 ## .settings
