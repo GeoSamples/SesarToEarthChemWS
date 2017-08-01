@@ -18,20 +18,20 @@ The SESAR XML v2 schema is used, and data are loaded into the 2016 version of Ea
 * On Eclipse, right click project name and select properties, click Java Build Path, click libraries, click Add JARS, click project name -> WebContent-> WEB-INF -> lib, select all jar files and click OK to add jar files;
 * Install Apache Tomcat at C:\apache-tomcat-8.0.39; 
 * Add the following contents to C:\apache-tomcat-8.0.39\conf\web.xml:
-<resource-ref>
+"<resource-ref>
  <description>postgreSQL Datasource example</description>
  <res-ref-name>jdbc/postgres</res-ref-name>
  <res-type>javax.sql.DataSource</res-type>
  <res-auth>Container</res-auth>
-</resource-ref>
+</resource-ref>"
 * Add the following contents to C:\apache-tomcat-8.0.39\conf\context.xml:
-<Context>
+"<Context>
 <Resource name="jdbc/postgres" auth="Container"
           type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
           url="jdbc:postgresql:xxxx"
           username="xxx" password="xxx" maxTotal="0" maxIdle="10"
 maxWaitMillis="-1"/>
-</Context>
+</Context>".
 
 # Deployment
 * Right click project name, "SesarToEarthChemWS", at Eclipse and select "Export";
