@@ -16,14 +16,12 @@ The SESAR XML v2 schema is used, and data are loaded into the 2016 version of Ea
 * Click "Browse..." to find location of "\apache-tomcat-8.0.39\webapps" and enter file "sesarec" for war file and click "Save";
 * Finally, click "Finish" at "Export" page to finish deployment.
 
-# Documentation
-
-## Use application
+# Use application
 * URL: hostname/sesarec/ssec/samples;
 * html form method: post;
 * content-type: application/xml;
 * accept-language: text/html;
-* if request is correct, sever returns HTTP 200 OK and if error occur, server returns response error messages.
+* if request is correct, sever returns HTTP 200 OK and if error occur, server returns error messages.
 
 # What's here:
 
