@@ -27,13 +27,15 @@ The SESAR XML v2 schema is used, and data are loaded into the 2016 version of Ea
 </resource-ref>
 ```
 * Add the following contents to C:\apache-tomcat-8.0.39\conf\context.xml:
-"<Context>
+```xml
+<Context>
 <Resource name="jdbc/postgres" auth="Container"
           type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
           url="jdbc:postgresql:xxxx"
           username="xxx" password="xxx" maxTotal="0" maxIdle="10"
 maxWaitMillis="-1"/>
-</Context>".
+</Context>"
+```
 
 # Deployment
 * Right click project name, "SesarToEarthChemWS", at Eclipse and select "Export";
