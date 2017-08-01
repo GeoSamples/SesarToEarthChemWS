@@ -23,7 +23,7 @@ The SESAR XML v2 schema is used, and data are loaded into the 2016 version of Ea
 * html form method: post;
 * content-type: application/xml;
 * accept-language: text/html;
-* If error 
+* if request is correct, sever returns HTTP 200 OK and if error occur, server returns response error messages.
 
 # What's here:
 
