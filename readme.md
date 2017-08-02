@@ -49,7 +49,7 @@ maxWaitMillis="-1"/>
 * content-type: application/xml;
 * accept-language: text/html;
 * if request is correct, sever returns "Status: 200 OK" with a statement "The data have been saved to database!";  
-* if XML Syntax errors, sever returns "Status: 400 Bad Request"; if url errors, sever returns "Status: 404 Not Found"; if other errors occur, server returns error messages.
+* if XML Syntax error occurs, sever returns "Status: 400 Bad Request"; if url error occurs, sever returns "Status: 404 Not Found"; if other errors occur, server returns error messages.
 
 # What's here:
 
