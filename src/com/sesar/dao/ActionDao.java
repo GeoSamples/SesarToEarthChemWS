@@ -20,11 +20,11 @@ public class ActionDao {
 	private List<String> queries;
 	private Integer methodNum;
 	private Integer actionNum;
-	private Integer maxActionNum;
-	private Integer maxFeatureActionNum;
-	private Integer maxEquipmentNum;
-	private Integer maxEqActionBridgeNum;
-	private Integer maxActionByBridgeNum = 0;
+//	private Integer maxActionNum;
+//	private Integer maxFeatureActionNum;
+//	private Integer maxEquipmentNum;
+//	private Integer maxEqActionBridgeNum;
+//	private Integer maxActionByBridgeNum = 0;
 	private Integer orgNum;
 	private String beginDate; //yyyy-mm-dd
 	private String endDate;
@@ -34,18 +34,18 @@ public class ActionDao {
 		this.sample = sample;
 		this.sfNum = sfNum;
 		this.queries = queries;
-		maxFeatureActionNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(feature_action_num) FROM feature_action");
-		maxEquipmentNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(equipment_num) FROM equipment");
-		maxEqActionBridgeNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(bridge_num) FROM equipment_action");
-		maxActionNum = (Integer)DatabaseUtil.getUniqueResult("select max(action_num) from action");
+//		maxFeatureActionNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(feature_action_num) FROM feature_action");
+	//	maxEquipmentNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(equipment_num) FROM equipment");
+	//	maxEqActionBridgeNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(bridge_num) FROM equipment_action");
+	//	maxActionNum = (Integer)DatabaseUtil.getUniqueResult("select max(action_num) from action");
 		beginDate = sample.getCollectionStartDate();
 		endDate = sample.getCollectionEndDate();
 		actionDescr = sample.getCollectionMethodDescr();
 		if(!"".equals(actionDescr)) actionDescr = "'"+actionDescr+"'";
 		else actionDescr = null;
 		orgNum = (Integer)DatabaseUtil.getUniqueResult("select organization_num from organization where organization_name like 'UNKNOWN'");
-		Object obj = DatabaseUtil.getUniqueResult("SELECT max(bridge_num) FROM action_by");
-		if(obj != null ) maxActionByBridgeNum = (Integer)obj;
+	//	Object obj = DatabaseUtil.getUniqueResult("SELECT max(bridge_num) FROM action_by");
+	//	if(obj != null ) maxActionByBridgeNum = (Integer)obj;
 		setMethod();
 	}
 	
@@ -87,7 +87,8 @@ public class ActionDao {
 			Object obj = DatabaseUtil.getUniqueResult(q);
 			if(obj != null) actionNum = (Integer)obj;
 			else {
-				actionNum = ++maxActionNum;
+				//actionNum = ++maxActionNum;
+				actionNum = (Integer)DatabaseUtil.getUniqueResult("select nextval('action_action_num_seq')");
 				q = "INSERT INTO action values ("+actionNum+","+typeNum+","+methodNum+",'"+beginDate+"',null,'"+endDate+
 					"',null,"+actionDescr+",null,"+orgNum+","+name+",null)";
 				queries.add(q);
@@ -96,8 +97,8 @@ public class ActionDao {
 		else {
 			actionNum = (Integer)DatabaseUtil.getUniqueResult("select action_num from action where action_type_num ="+typeNum+" and action_name like 'Unknown%' ");
 		}
-		queries.add("INSERT INTO feature_action values ("+(++maxFeatureActionNum)+","+sfNum+","+actionNum+")");
-	
+	//	queries.add("INSERT INTO feature_action values ("+(++maxFeatureActionNum)+","+sfNum+","+actionNum+")");
+		queries.add("INSERT INTO feature_action values (nextval('feature_action_feature_action_num_seq'),"+sfNum+","+actionNum+")");
 	}
 
 	private void saveEquipmentAction(String name, String type, String descr) {
@@ -108,7 +109,8 @@ public class ActionDao {
 		//set typeNum
 		if(obj != null) typeNum = (Integer) obj;		
 		else {
-			typeNum = (Integer)DatabaseUtil.getUniqueResult("select max(equipment_type_num+1) from equipment_type");
+			//typeNum = (Integer)DatabaseUtil.getUniqueResult("select max(equipment_type_num+1) from equipment_type");
+			typeNum = (Integer)DatabaseUtil.getUniqueResult("select nextval('equipment_type_equipment_type_num_seq')");
 			String q="INSERT INTO equipment_type VALUES ("+typeNum+",'"+type+"','Sesar')";
 			queries.add(q);
 		}
@@ -116,14 +118,15 @@ public class ActionDao {
 		obj = DatabaseUtil.getUniqueResult("select equipment_num  from equipment where upper(equipment_name) = upper('"+name+"') and equipment_type_num = "+typeNum);
 		if(obj != null) eqNum = (Integer)obj;
 		else {
+			eqNum = (Integer)DatabaseUtil.getUniqueResult("select nextval('equipment_equipment_num_seq'");
 			String q  = "INSERT INTO equipment (equipment_num, equipment_code, equipment_name, equipment_type_num, equipment_description) VALUES ("+
-					(++maxEquipmentNum)+",'"+name+"','"+name+"',"+typeNum+","+descr+")";
+					eqNum+",'"+name+"','"+name+"',"+typeNum+","+descr+")";
 			queries.add(q);
-			eqNum = maxEquipmentNum;
+		//	eqNum = maxEquipmentNum;
 		}
 		obj = DatabaseUtil.getUniqueResult("select bridge_num from equipment_action where action_num = "+actionNum+" and equipment_num = "+eqNum);
 		if(obj == null) {
-			String q = "INSERT INTO equipment_action values ("+(++maxEqActionBridgeNum)+","+eqNum+","+actionNum+")";
+			String q = "INSERT INTO equipment_action values (nextval('equipment_action_bridge_num_seq'),"+eqNum+","+actionNum+")";
 			queries.add(q);
 		}
 	}
@@ -134,7 +137,7 @@ public class ActionDao {
 		if(!"".equals(descr)) q += " and role_description ='"+descr+"'";		
 	    Object obj = DatabaseUtil.getUniqueResult(q);
 	    if(obj == null) {
-	    	q = "INSERT INTO action_by values ("+(++maxActionByBridgeNum)+","+actionNum+","+affiliationNum+",1,'"+descr+"')";
+	    	q = "INSERT INTO action_by values (nextval('action_by_bridge_num_seq'),"+actionNum+","+affiliationNum+",1,'"+descr+"')";
 	    	queries.add(q);
 	    }
 	}
@@ -147,7 +150,7 @@ public class ActionDao {
 			if(obj != null) methodNum = (Integer)obj;
 			else {
 				Integer typeNum = (Integer) DatabaseUtil.getUniqueResult("select method_type_num from method_type where method_type_name = 'Collection'");
-				methodNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(method_num+1) FROM method");
+				methodNum = (Integer)DatabaseUtil.getUniqueResult("select nextval('method_method_num_seq')");
 				queries.add("INSERT INTO method values ("+methodNum+","+typeNum+",'"+method+"','"+method+"','Sesar Method')");
 			}	
 		}
@@ -177,11 +180,11 @@ public class ActionDao {
 			if(obj != null) return (Integer)obj;
 		}
 		else {
-			personNum = (Integer)DatabaseUtil.getUniqueResult("select max(person_num+1) from person");
+			personNum = (Integer)DatabaseUtil.getUniqueResult("select nextval('person_person_num_seq')");
 			q = "insert into person values ("+personNum+","+first+","+middle+","+last+",1)";
 			queries.add(q);
 		}
-		Integer afNum = (Integer) DatabaseUtil.getUniqueResult("select max(affiliation_num+1) from affiliation");
+		Integer afNum = (Integer) DatabaseUtil.getUniqueResult("select nextval('affiliation_affiliation_num_seq')");
 		q ="insert into affiliation values ("+afNum+","+personNum+","+orgNum+")";
 		queries.add(q);
 		return afNum;
