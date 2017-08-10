@@ -20,18 +20,18 @@ public class SamplingFeatureDao {
 	private List<String> queries = new ArrayList<String>();
 	private int annotationNum;
 	private int sfAnnotationNum;
-	private int sfepBridgeNum; //sampling_feature_extension_property.bridge_num
-	private int foiNum; //feature_of_interest number
-	private int foiCvNum; //feature_of_interest_cv number
-	private int foiTypeNum; //max feature_of_interest_type number
-	private int maxMethodNum; 
-	private int collMethodNum; //collection_method
+//	private int sfepBridgeNum; //sampling_feature_extension_property.bridge_num
+//	private int foiNum; //feature_of_interest number
+//	private int foiCvNum; //feature_of_interest_cv number
+//	private int foiTypeNum; //max feature_of_interest_type number
+//	private int maxMethodNum; 
+//	private int collMethodNum; //collection_method
 	
 	public SamplingFeatureDao (Sample sample) {
 		this.sample= sample;
-		Object obj = DatabaseUtil.getUniqueResult("select max(sampling_feature_num) from sampling_feature");
+	/*	Object obj = DatabaseUtil.getUniqueResult("select max(sampling_feature_num) from sampling_feature");
 		if(obj != null) sfNum = (Integer)obj; 
-		else sfNum = 0;
+		else sfNum = 0; */
 	}
 	
 	public String saveDataToDB() {		
@@ -44,8 +44,8 @@ public class SamplingFeatureDao {
 		else return error; 
 
 		//SamplingFeatureAnnotation
-		annotationNum =  (Integer)DatabaseUtil.getUniqueResult("select max(annotation_num) from annotation");		
-		sfAnnotationNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(sampling_feature_annotation_num) FROM sampling_feature_annotation");
+//		//annotationNum =  (Integer)DatabaseUtil.getUniqueResult("select max(annotation_num) from annotation");		
+		//sfAnnotationNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(sampling_feature_annotation_num) FROM sampling_feature_annotation");
 		String annotation = sample.getClassificationComment();
 		if(!"".equals(annotation)) saveSamplingFeatureAnnotation(annotation,"SampleComment");
 		annotation = sample.getFieldName();
@@ -91,8 +91,8 @@ public class SamplingFeatureDao {
 		
 		
 		//SamplingFeatureExtensionProperty
-		Object obj = DatabaseUtil.getUniqueResult("SELECT max(bridge_num) FROM sampling_feature_extension_property");		
-		if(obj != null) sfepBridgeNum = (Integer) obj;
+		//Object obj = DatabaseUtil.getUniqueResult("SELECT max(bridge_num) FROM sampling_feature_extension_property");		
+		//if(obj != null) sfepBridgeNum = (Integer) obj;
 		Float extensionProperty = sample.getAgeMin();
 		if(extensionProperty != null) saveSamplingFeatureExtensionProperty(extensionProperty,"minimum numeric age");
 		extensionProperty = sample.getAgeMax();
@@ -111,9 +111,9 @@ public class SamplingFeatureDao {
 		if(extensionProperty != null) saveSamplingFeatureExtensionProperty(extensionProperty,"sample purpose");
 		
 		//FeatureOfInterest
-		foiNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(feature_of_interest_num) FROM feature_of_interest");	
-		foiCvNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(feature_of_interest_cv_num) FROM feature_of_interest_cv");		
-		foiTypeNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(feature_of_interest_type_num) FROM feature_of_interest_type");		
+//		foiNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(feature_of_interest_num) FROM feature_of_interest");	
+//		foiCvNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(feature_of_interest_cv_num) FROM feature_of_interest_cv");		
+//		foiTypeNum = (Integer)DatabaseUtil.getUniqueResult("SELECT max(feature_of_interest_type_num) FROM feature_of_interest_type");		
 		String gu = sample.getGeologicalUnit();
 		if(!"".equals(gu)) saveFeatureOfInterest(gu, "GEOLOGICAL_UNIT"); 
 		String pName = sample.getPrimaryLocationName();
@@ -136,7 +136,8 @@ public class SamplingFeatureDao {
 		if(obj == null) return "sample_type: "+type+" is not found in database";
 		int typeNum = (Integer)obj;
 		String geometry = getGeometry(sample.getStartPoint(), sample.getEndPoint());
-		String q = "INSERT INTO sampling_feature values ("+(++sfNum)+","+typeNum+",'"+name+"',null,'"+sample.getDescription()+"',"+geometry+sample.getElevationM()+",'"+sample.getVerticalDatum()+"')";
+		sfNum = (Integer)DatabaseUtil.getUniqueResult("select nextval('sampling_feature_sampling_feature_num_seq')");
+		String q =  "INSERT INTO sampling_feature values ("+sfNum+","+typeNum+",'"+name+"',null,'"+sample.getDescription()+"',"+geometry+sample.getElevationM()+",'"+sample.getVerticalDatum()+"')";
 		queries.add(q);	
 		return null;
 	}
@@ -154,18 +155,18 @@ public class SamplingFeatureDao {
 	
 	private String saveSamplingFeatureExternalIdentifierForIGSN() {
 		String ic = sample.getIgsn();
-		Object obj =  DatabaseUtil.getUniqueResult("select max(bridge_num) from sampling_feature_external_identifier");
-		int bridgeNum = 1;
-		if(obj != null ) bridgeNum = (Integer)obj+1;
-		String q ="INSERT INTO sampling_feature_external_identifier VALUES ("+bridgeNum+","+sfNum+",upper('"+ic+"'),null,2)";
+		//Object obj =  DatabaseUtil.getUniqueResult("select max(bridge_num) from sampling_feature_external_identifier");
+		//int bridgeNum = 1;
+		//if(obj != null ) bridgeNum = (Integer)obj+1;
+		String q ="INSERT INTO sampling_feature_external_identifier VALUES (nextval('sampling_feature_external_identifier_bridge_num_seq'),"+sfNum+",upper('"+ic+"'),null,2)";
 		queries.add(q); 	
 		String ip = sample.getParentIgsn();
 		if(ip != null && !"".equals(ip)) {
-			obj =  DatabaseUtil.getUniqueResult("select sample_feature_num from sampling_feature_external_identifier where sampling_feature_external_id = upper('"+ip+"')");
+			Object obj =  DatabaseUtil.getUniqueResult("select sample_feature_num from sampling_feature_external_identifier where sampling_feature_external_id = upper('"+ip+"')");
 			if(obj == null) return "Parent IGSN "+ip + " is not found in database";
 			ip = ""+obj;
-			obj= DatabaseUtil.getUniqueResult("select max(related_feature_num+1) from related_feature");
-			q = "INSERT INTO related_feature VALUES ("+obj+","+sfNum+",13," +ip+")";		
+		//	obj= DatabaseUtil.getUniqueResult("select max(related_feature_num+1) from related_feature");
+			q = "INSERT INTO related_feature VALUES (nextval('related_feature_related_feature_num_seq'),"+sfNum+",13," +ip+")";		
 			queries.add(q); 
 		} 
 		return null;
@@ -177,12 +178,12 @@ public class SamplingFeatureDao {
 		rock.getMetamorphic().getMetamorphicType();
 		String type = rock.getMetamorphic().getMetamorphicType();
 		if("".equals(type)) return null;
-		Object obj =  DatabaseUtil.getUniqueResult("select max(taxonomic_classifier_num+1) from taxonomic_classifier");
-		String tcNum = ""+obj;
+		//Object obj =  DatabaseUtil.getUniqueResult("select max(taxonomic_classifier_num+1) from taxonomic_classifier");
+		Integer tcNum = (Integer)DatabaseUtil.getUniqueResult("select nextval('taxonomic_classifier_taxonomic_classifier_num_seq')");
 		String q ="INSERT INTO taxonomic_classifier VALUES ("+tcNum +",'Sesar','"+type+"',null,'Sesar Classification from Sesar')";
 		queries.add(q);
-		obj =  DatabaseUtil.getUniqueResult("SELECT max(bridge_num+1) FROM sampling_feature_taxonomic_classifier");
-		q ="INSERT INTO sampling_feature_taxonomic_classifier VALUES ("+obj+","+sfNum+","+tcNum+")";
+	//	obj =  DatabaseUtil.getUniqueResult("SELECT max(bridge_num+1) FROM sampling_feature_taxonomic_classifier");
+		q ="INSERT INTO sampling_feature_taxonomic_classifier VALUES (nextval('sampling_feature_taxonomic_classifier_bridge_num_seq'),"+sfNum+","+tcNum+")";
 		queries.add(q);
 		return null;
 	}
@@ -192,9 +193,11 @@ public class SamplingFeatureDao {
 		if(!"".equals(text)) {
 			String code = ex.getUrlType();
 			String link = ex.getUrl();
-			String q = "INSERT INTO annotation values ("+(++annotationNum)+","+typeNum+",'"+text+"',139,now(),'"+link+"','"+code+"')";
+			annotationNum = (Integer) DatabaseUtil.getUniqueResult("select nextval('annotation_annotation_num_seq')");
+			String q = "INSERT INTO annotation values ("+annotationNum+","+typeNum+",'"+text+"',139,now(),'"+link+"','"+code+"')";
 			queries.add(q);
-			q = "INSERT INTO sampling_feature_annotation values ("+(++sfAnnotationNum)+","+sfNum+","+annotationNum+")";
+			sfAnnotationNum = (Integer)DatabaseUtil.getUniqueResult("select nextval('sampling_feature_annotation_sampling_feature_annotation_num_seq')");
+			q = "INSERT INTO sampling_feature_annotation values ("+sfAnnotationNum +","+sfNum+","+annotationNum+")";
 			queries.add(q);
 		}
 	}
@@ -202,15 +205,17 @@ public class SamplingFeatureDao {
 	/////////////
 	private void saveSamplingFeatureAnnotation(String text, String type) {
 		Integer typeNum = (Integer) DatabaseUtil.getUniqueResult("select annotation_type_num from annotation_type where annotation_type_name = '"+type+"'");
-		String q = "INSERT INTO annotation values ("+(++annotationNum)+","+typeNum+",'"+text+"',139,now())";
+		annotationNum = (Integer) DatabaseUtil.getUniqueResult("select nextval('annotation_annotation_num_seq')");
+		String q = "INSERT INTO annotation values ("+annotationNum+","+typeNum+",'"+text+"',139,now())";
 		queries.add(q);
-		q = "INSERT INTO sampling_feature_annotation values ("+(++sfAnnotationNum)+","+sfNum+","+annotationNum+")";
+		sfAnnotationNum = (Integer)DatabaseUtil.getUniqueResult("select nextval('sampling_feature_annotation_sampling_feature_annotation_num_seq')");
+		q = "INSERT INTO sampling_feature_annotation values ("+sfAnnotationNum+","+sfNum+","+annotationNum+")";
 		queries.add(q);
 	}
 	
 	private void saveSamplingFeatureExtensionProperty(Float value, String type) {
 		Integer typeNum = (Integer) DatabaseUtil.getUniqueResult("SELECT extension_property_num FROM extension_property where extension_property_name = '"+type+"'");
-		String q = "INSERT INTO sampling_feature_extension_property values ("+(++sfepBridgeNum)+","+sfNum+","+typeNum+","+value+")";
+		String q = "INSERT INTO sampling_feature_extension_property values (nextval('sampling_feature_extension_property_bridge_num_seq'),"+sfNum+","+typeNum+","+value+")";
 		queries.add(q);
 	}
 	
@@ -219,18 +224,18 @@ public class SamplingFeatureDao {
 		Integer cvNum = null;
 		if(obj != null) cvNum = (Integer)obj;
 		else {
-			queries.add("INSERT INTO feature_of_interest_cv values ("+(++foiCvNum)+",'"+cvName+"','SESAR')");
-			cvNum = foiCvNum;
+			cvNum = (Integer)DatabaseUtil.getUniqueResult("select nextval('feature_of_interest_cv_feature_of_interest_cv_num_seq')");
+			queries.add("INSERT INTO feature_of_interest_cv values ("+cvNum+",'"+cvName+"','SESAR')");			
 		}
 		Integer typeNum = null;
 		obj = DatabaseUtil.getUniqueResult("SELECT feature_of_interest_type_num FROM feature_of_interest_type where feature_of_interest_type_name = '"+type+"'");
 		if(obj != null) typeNum = (Integer)obj;
 		else {
-			queries.add("INSERT INTO feature_of_interest_type values ("+(++foiTypeNum)+",'"+type+"','primary_location_name, sesar')");
-			typeNum = foiTypeNum;
+			typeNum = (Integer) DatabaseUtil.getUniqueResult("select nextval('feature_of_interest_type_feature_of_interest_type_num_seq')");
+			queries.add("INSERT INTO feature_of_interest_type values ("+typeNum+",'"+type+"','primary_location_name, sesar')");
 		}
 		
-		queries.add("INSERT INTO feature_of_interest values ("+(++foiNum)+","+sfNum+","+typeNum+","+cvNum+")");
+		queries.add("INSERT INTO feature_of_interest values (nextval('feature_of_interest_feature_of_interest_num_seq'),"+sfNum+","+typeNum+","+cvNum+")");
 	}
 	
 	private String getGeometry(String p1, String p2) {
